@@ -1,0 +1,8 @@
+*.md
+*.log
+*.yml
+*.json
+spec
+coverage
+generated
+node_modules
