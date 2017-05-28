@@ -16,25 +16,25 @@ describe 'logger', ->
     @log = logger.getLogger(10, stdout(), stderr())
     logger.setLevel(1)
 
-  it 'can print status', (done) ->
+  it 'can print some logs', (done) ->
     @log()
     @log('ok')
     @log('foo')
     @log('bar', 'buzz')
     @log('fail', 'message')
-    @log('write', 'message', -> 42)
-
-    .then =>
+    @log('write', 'message', -> 42).then ->
       expect(stdout.buffer.length).toEqual 13
+      done()
 
-      @log 'async', { src: 'input', dest: 'output' }, ->
-        new Promise (resolve) ->
-          setTimeout ->
-            resolve(null)
-          , 1000
+  it 'can print and await...', (done) ->
+    @log 'async', { src: 'input', dest: 'output' }, ->
+      new Promise (resolve) ->
+        setTimeout ->
+          resolve(null)
+        , 1100
 
     .then ->
-      expect(stdout.buffer.length).toEqual 25
+      expect(stdout.buffer.length).toEqual 13
       done()
 
   it 'can handle levels', ->
