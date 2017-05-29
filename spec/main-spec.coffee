@@ -31,10 +31,10 @@ describe 'logger', ->
       new Promise (resolve) ->
         setTimeout ->
           resolve(null)
-        , 1100
+        , 1000
 
     .then ->
-      expect(stdout.buffer.length).toEqual 13
+      expect(stdout.buffer.length).toEqual 12
       done()
 
   it 'can handle levels', ->
