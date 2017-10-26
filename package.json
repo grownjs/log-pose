@@ -1,6 +1,6 @@
 {
   "name": "log-pose",
-  "version": "0.2.6",
+  "version": "0.3.0",
   "main": "lib/index.js",
   "license": "MIT",
   "scripts": {
@@ -24,10 +24,5 @@
     "eslint-plugin-import": "^2.2.0",
     "istanbul": "^0.4.5",
     "jasmine-node": "2.0.0-beta4"
-  },
-  "bundledDependencies": [
-    "chalk",
-    "cli-width",
-    "pretty-ms"
-  ]
+  }
 }
