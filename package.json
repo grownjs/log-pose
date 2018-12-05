@@ -2,6 +2,7 @@
   "name": "log-pose",
   "version": "0.3.3",
   "main": "lib/index.js",
+  "description": "Helps you to not get lost",
   "license": "MIT",
   "files": [
     "lib/*.js"
