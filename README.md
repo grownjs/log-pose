@@ -39,7 +39,7 @@ const fail = LogPose.newLogger('my-app', 'verbose');
 
 ### Logger
 
-Created instances are functions that can be used to log statuses:
+It's a function that can print statuses:
 
 ```js
 // single status
@@ -66,17 +66,17 @@ async function main() {
 main();
 ```
 
-Those functions also have methods:
+Also, it have some methods:
 
 - `printf(...)` &mdash; Prints always, with formatting enabled
 - `write(...)` &mdash; Prints always, without formatting
-- `info(...)` &mdash; Prints if level is `>= 0`
+- `info(...)` &mdash; Prints if level is `> 0`
 - `debug(...)` &mdash; Prints if level is `>= 1`
 - `verbose(...)` &mdash; Prints if level is `>= 2`
 - `isInfo()` &mdash; Returns `true` if level is `> 0`
-- `isDebug()` &mdash; Returns `true` if level is `> 1`
-- `isVerbose()` &mdash; Returns `true` if level is `> 2`
-- `isEnabled()` &mdash; Returns `true` if level is `>= 0`
+- `isDebug()` &mdash; Returns `true` if level is `>= 1`
+- `isVerbose()` &mdash; Returns `true` if level is `>= 2`
+- `isEnabled()` &mdash; Returns `true` if level is `> 0`
 
 Formatting works calling built-in `util.format()` on printing, e.g.
 
