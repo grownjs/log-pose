@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "dev": "npm test -- -w",
-    "lint": "eslint bin lib spec examples",
+    "lint": "eslint lib tests",
     "test": "npm run test:unit --",
     "test:ci": "npm run coverage:all && npm run report -- -r lcov",
     "test:all": "npm run test:run tests && npm run report -- -r html",
