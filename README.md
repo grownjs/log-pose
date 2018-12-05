@@ -4,7 +4,7 @@
 [![travis-ci](https://api.travis-ci.org/pateketrueke/log-pose.svg)](https://travis-ci.org/pateketrueke/log-pose)
 [![codecov](https://codecov.io/gh/pateketrueke/log-pose/branch/master/graph/badge.svg)](https://codecov.io/gh/pateketrueke/log-pose)
 
-Small logger interface.
+Helps you to not get lost.
 
 ```bash
 $ npm i log-pose --save
@@ -18,30 +18,37 @@ Import the module and retrieve a shared logger instance.
 ```js
 import LogPose from 'log-pose';
 
-const log = LogPose.setLevel('verbose').getLogger();
-```
+// define logging level
+LogPose.setLevel('verbose');
 
-> Calling `newLogger()` will return a single `log()` method, not an Logger instance.
+// get shared logger instance
+const log = LogPose.getLogger();
+
+// calling `newLogger()` returns a single method
+const fail = LogPose.newLogger('my-app', 'verbose');
+```
 
 - `pause()` &mdash; Pause the logging output
 - `resume()` &mdash; Resume the logging output
-- `setLevel(type: String|Boolean)` &mdash; Set a logging level to disable/enable verbs; if `false` is given logging gets disabled (types are: `info`, `debug`, `verbose`)
-- `setLogger()` &mdash; Set the standard-output for logging; if any falsy value is given, then the entire logging is disabled
-- `getLogger()` &mdash; Returns a new `Logger` instance
-- `newLogger()` &mdash; Returns a single `log` method
+- `setLevel(type: String|Boolean)` &mdash; Set a logging level to disable/enable verbs; if `false` is given logging gets disabled
+- `setLogger([stdout: Object])` &mdash; Set the standard-output for logging; if any _falsy_ value is given, then the entire logging is disabled. Given `stdout` is used to output log messages
+- `getLogger([depth: Number[, stdout: Object]])` &mdash; Returns a shared logger instance; `depth` is used on status formatting
+- `newLogger(prefix: String[, level: String|Number[, depth: Number, stdout: Object]])` &mdash; Returns a single logging method; actually, the shared logger is built from those methods. Methods are prefixed and receive a base level and depth; their output is skipped if given level is above the currently defined
+
+> Log levels are `info`, `debug` and `verbose`.
 
 ### Logger
 
-Created instances are functions:
+Created instances are functions that can be used to log statuses:
 
 ```js
-// single tasks
+// single status
 log('testing');
 
-// prefixed tasks
+// prefixed status
 log('kind', 'value');
 
-// async tasks
+// async status
 async function main() {
   // single task delayed
   await log('long task', () => new Promise(resolve => setTimeout(resolve, 1000)));
@@ -71,7 +78,7 @@ Those functions also have methods:
 - `isVerbose()` &mdash; Returns `true` if level is `> 2`
 - `isEnabled()` &mdash; Returns `true` if level is `>= 0`
 
-Formatting works replacing all `%s` for the stringified version of given values, e.g.
+Formatting works calling built-in `util.format()` on printing, e.g.
 
 ```js
 log.info('{%info.bgBlue.white Text with spaces and values: %s%}\n', 42);
