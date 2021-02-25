@@ -8,7 +8,7 @@
     "lib/*.js"
   ],
   "scripts": {
-    "dev": "npm test -- -w",
+    "dev": "npm run test:unit -- -w",
     "lint": "eslint lib tests",
     "test": "npm run test:unit && npm run test:ci --",
     "test:ci": "npm run coverage:all && npm run report -- -r lcov",
@@ -30,12 +30,13 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "codecov": "^3.1.0",
-    "lodash": ">=4.17.13",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.22.1",
     "eslint-utils": ">=1.4.1",
     "js-yaml": ">=3.13.1",
-    "eslint": "^5.9.0",
-    "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-plugin-import": "^2.2.0",
+    "lodash": ">=4.17.13",
     "mocha": "^5.2.0",
     "nyc": "^13.1.0"
   }

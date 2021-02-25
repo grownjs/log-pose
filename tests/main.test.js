@@ -2,16 +2,12 @@ const { expect } = require('chai');
 
 const logger = require('..');
 
-function strip(str) {
-  return str.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-PRZcf-nqry=><]/g, ''); // eslint-disable-line
-}
-
 function stdout() {
   stdout.buffer = [];
 
   return {
     write(...args) {
-      stdout.buffer.push(strip(args.join('')));
+      stdout.buffer.push(args.join(''));
     },
   };
 }
@@ -58,26 +54,44 @@ describe('logger', () => {
     log.printf(2);
     log.verbose(-1);
 
-    expect(stdout.buffer).to.eql(['1', '\r2']);
+    expect(stdout.buffer).to.eql([
+      '1',
+      '\r\u001b[1A2\u001b[1A\u001b[\u001b[1AK\u001b[1A',
+    ]);
 
     // info-level
     logger.setLevel(1);
     log.info(3);
     log.verbose(-1);
 
-    expect(stdout.buffer).to.eql(['1', '\r2', '3']);
+    expect(stdout.buffer).to.eql([
+      '1',
+      '\r\u001b[1A2\u001b[1A\u001b[\u001b[1AK\u001b[1A',
+      '\u001b[1A3\u001b[1A',
+    ]);
 
     // debug-level
     logger.setLevel(2);
     log.debug(4);
     log.verbose(-1);
 
-    expect(stdout.buffer).to.eql(['1', '\r2', '3', '4']);
+    expect(stdout.buffer).to.eql([
+      '1',
+      '\r\u001b[1A2\u001b[1A\u001b[\u001b[1AK\u001b[1A',
+      '\u001b[1A3\u001b[1A',
+      '\u001b[1A4\u001b[1A',
+    ]);
 
     // verbose-level
     logger.setLevel(3);
     log.verbose(5);
 
-    expect(stdout.buffer).to.eql(['1', '\r2', '3', '4', '5']);
+    expect(stdout.buffer).to.eql([
+      '1',
+      '\r\u001b[1A2\u001b[1A\u001b[\u001b[1AK\u001b[1A',
+      '\u001b[1A3\u001b[1A',
+      '\u001b[1A4\u001b[1A',
+      '\u001b[1A5\u001b[1A',
+    ]);
   });
 });
