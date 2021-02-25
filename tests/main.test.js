@@ -16,17 +16,13 @@ function stdout() {
   };
 }
 
-function stderr() {
-  return {};
-}
-
 let log;
 
 /* global beforeEach, describe, it */
 
 describe('logger', () => {
   beforeEach(() => {
-    log = logger.getLogger(10, stdout(), stderr());
+    log = logger.getLogger(10, stdout());
     logger.setLevel(1);
   });
 
