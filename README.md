@@ -1,6 +1,6 @@
 # LogPose
 
-[![NPM version](https://badge.fury.io/js/log-pose.png)](http://badge.fury.io/js/log-pose)
+[![NPM version](https://badge.fury.io/js/log-pose.svg)](http://badge.fury.io/js/log-pose)
 [![Build status](https://github.com/pateketrueke/log-pose/workflows/build/badge.svg)](https://github.com/pateketrueke/log-pose/actions)
 [![codecov](https://codecov.io/gh/pateketrueke/log-pose/branch/master/graph/badge.svg)](https://codecov.io/gh/pateketrueke/log-pose)
 
