@@ -56,7 +56,7 @@ describe('logger', () => {
 
     expect(stdout.buffer).to.eql([
       '1',
-      '\r\u001b[1A2\u001b[1A\u001b[\u001b[1AK\u001b[1A',
+      '\r2\u001b[K',
     ]);
 
     // info-level
@@ -66,8 +66,8 @@ describe('logger', () => {
 
     expect(stdout.buffer).to.eql([
       '1',
-      '\r\u001b[1A2\u001b[1A\u001b[\u001b[1AK\u001b[1A',
-      '\u001b[1A3\u001b[1A',
+      '\r2\u001b[K',
+      '3',
     ]);
 
     // debug-level
@@ -77,9 +77,9 @@ describe('logger', () => {
 
     expect(stdout.buffer).to.eql([
       '1',
-      '\r\u001b[1A2\u001b[1A\u001b[\u001b[1AK\u001b[1A',
-      '\u001b[1A3\u001b[1A',
-      '\u001b[1A4\u001b[1A',
+      '\r2\u001b[K',
+      '3',
+      '4',
     ]);
 
     // verbose-level
@@ -88,10 +88,10 @@ describe('logger', () => {
 
     expect(stdout.buffer).to.eql([
       '1',
-      '\r\u001b[1A2\u001b[1A\u001b[\u001b[1AK\u001b[1A',
-      '\u001b[1A3\u001b[1A',
-      '\u001b[1A4\u001b[1A',
-      '\u001b[1A5\u001b[1A',
+      '\r2\u001b[K',
+      '3',
+      '4',
+      '5',
     ]);
   });
 });
