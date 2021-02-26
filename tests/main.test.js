@@ -28,6 +28,15 @@ describe('utils', () => {
       expect(util.style('\rx\ny\nz')).to.eql('\rx\x1b[K\ny\nz');
       expect(util.style('\rm\nosoms\n!!')).to.eql('\rm\x1b[K\nosoms\n!!');
     });
+
+    it('should shorten the styled text on line-clear', () => {
+      expect(util.style('\r{% red this is a large text %}')).to.contain('this is...e text');
+    });
+
+    it('should keep styled text without shortening using .', () => {
+      expect(util.style('\r{% red. this is a large text %}')).to.contain('this is a large text');
+      expect(util.style('\r{% error. this is a large text %}')).to.contain('this is a large text');
+    });
   });
 });
 
