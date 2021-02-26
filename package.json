@@ -1,6 +1,6 @@
 {
   "name": "log-pose",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "main": "lib/index.js",
   "description": "Helps you to not get lost",
   "license": "MIT",
