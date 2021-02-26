@@ -1,6 +1,7 @@
 const { expect } = require('chai');
 
-const logger = require('..');
+const logger = require('../lib');
+const util = require('../lib/utils');
 
 function stdout() {
   stdout.buffer = [];
@@ -12,11 +13,26 @@ function stdout() {
   };
 }
 
-let log;
-
 /* global beforeEach, describe, it */
 
+describe('utils', () => {
+  describe('style()', () => {
+    it('should use a backspace char to backline', () => {
+      expect(util.style('\b')).to.eql('\u001b[1A');
+    });
+
+    it('should clear before the first newline', () => {
+      expect(util.style('x')).to.eql('x');
+      expect(util.style('\n')).to.eql('\n');
+      expect(util.style('x\ny\nz')).to.eql('x\ny\nz');
+      expect(util.style('\rx\ny\nz')).to.eql('\rx\x1b[K\ny\nz');
+      expect(util.style('\rm\nosoms\n!!')).to.eql('\rm\x1b[K\nosoms\n!!');
+    });
+  });
+});
+
 describe('logger', () => {
+  let log;
   beforeEach(() => {
     log = logger.getLogger(10, stdout());
     logger.setLevel(1);
@@ -56,7 +72,7 @@ describe('logger', () => {
 
     expect(stdout.buffer).to.eql([
       '1',
-      '\r2\u001b[K',
+      '2',
     ]);
 
     // info-level
@@ -66,7 +82,7 @@ describe('logger', () => {
 
     expect(stdout.buffer).to.eql([
       '1',
-      '\r2\u001b[K',
+      '2',
       '3',
     ]);
 
@@ -77,7 +93,7 @@ describe('logger', () => {
 
     expect(stdout.buffer).to.eql([
       '1',
-      '\r2\u001b[K',
+      '2',
       '3',
       '4',
     ]);
@@ -88,7 +104,7 @@ describe('logger', () => {
 
     expect(stdout.buffer).to.eql([
       '1',
-      '\r2\u001b[K',
+      '2',
       '3',
       '4',
       '5',
