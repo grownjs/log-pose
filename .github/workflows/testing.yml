@@ -4,16 +4,18 @@ on:
   push:
     branches:
     - master
+    - develop
   pull_request:
     branches:
     - master
 
 jobs:
-  build-test:
+  test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-      - run: npm ci
-      - run: npm run test:ci
-      - run: npm run codecov
+      - uses: actions/checkout@v2
+      - run: |
+          export CODECOV_TOKEN=${{ secrets.CODECOV_TOKEN }}
+          npm ci
+          npm run test:ci
+          npm run codecov
