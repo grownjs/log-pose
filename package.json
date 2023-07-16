@@ -7,6 +7,9 @@
   "files": [
     "lib/*.js"
   ],
+  "engines": {
+    "node": "*"
+  },
   "scripts": {
     "dev": "npm run test:unit -- -w",
     "lint": "eslint lib tests",
