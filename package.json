@@ -23,9 +23,9 @@
     "pretest": "npm run lint"
   },
   "dependencies": {
-    "chalk": "^2.3.0",
-    "cli-width": "^2.2.0",
-    "pretty-ms": "^3.0.1"
+    "chalk": "^2.4.2",
+    "cli-width": "^4.0.0",
+    "pretty-ms": "^3.2.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
