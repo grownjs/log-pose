@@ -26,8 +26,8 @@
     "pretest": "npm run lint"
   },
   "dependencies": {
-    "chalk": "^2.4.2",
     "cli-width": "^4.0.0",
+    "picocolors": "^1.0.0",
     "pretty-ms": "^3.2.0"
   },
   "devDependencies": {

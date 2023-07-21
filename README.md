@@ -120,4 +120,4 @@ Using these you can short your code:
 log.info('{%ok Text with spaces and values: %s%}\n', 42);
 ```
 
-> Color names are defined by [Chalk](https://github.com/chalk/chalk).
+> Color names are defined by [picocolors](https://github.com/alexeyraspopov/picocolors).
